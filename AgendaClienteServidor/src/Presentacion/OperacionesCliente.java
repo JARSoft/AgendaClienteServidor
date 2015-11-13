@@ -91,14 +91,15 @@ public class OperacionesCliente extends JFrame {
 			button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if(textFieldBusqueda.getText()!=null){
-						ArrayList<ArrayList<String>> resultado_de_busqueda =Gestor_Agenda_cliente.buscarContacto(textFieldBusqueda.getText());
-					filtrarPanel(resultado_de_busqueda);
+//						ArrayList<ArrayList<String>> resultado_de_busqueda =Gestor_Agenda_cliente.buscarContacto(textFieldBusqueda.getText());
+						ArrayList<ArrayList<String>> resultado_de_busqueda =Gestor_Agenda_cliente.buscarContacto("");
+//					filtrarPanel(resultado_de_busqueda);
 					}
 				}
 			});
 			panel.add(button);
 
-			actualizarPanel(true);
+//			actualizarPanel(true);
 		}
 		
 		{
@@ -119,7 +120,7 @@ public class OperacionesCliente extends JFrame {
 			JButton btnModificarContacto = new JButton("Modificar Contacto");
 			btnModificarContacto.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					FichaContacto fc = new FichaContacto(contactos.get(auxIndex),auxIndex);
+					FichaContacto fc = new FichaContacto(/*contactos.get(auxIndex),auxIndex*/);
 					fc.setResizable(false);
 					fc.setVisible(true);
 					esperarVentanaHija(fc, true);
@@ -133,8 +134,9 @@ public class OperacionesCliente extends JFrame {
 			JButton btnEliminarContacto = new JButton("Eliminar Contacto");
 			btnEliminarContacto.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					Gestor_Agenda_cliente.eliminarContacto(contactos.get(auxIndex).get(0), Integer.parseInt(contactos.get(auxIndex).get(1)),
-							contactos.get(auxIndex).get(2));
+//					Gestor_Agenda_cliente.eliminarContacto(contactos.get(auxIndex).get(0), 
+//							Integer.parseInt(contactos.get(auxIndex).get(1)),contactos.get(auxIndex).get(2));
+					Gestor_Agenda_cliente.eliminarContacto("",0,"");
 				}
 			});
 			btnEliminarContacto.setBackground(Color.WHITE);
@@ -210,7 +212,7 @@ public class OperacionesCliente extends JFrame {
 			public void windowClosed(WindowEvent e) {
 				OperacionesCliente.this.setEnabled(true);
 				OperacionesCliente.this.setVisible(true);
-				if(actualizar) actualizarPanel(false);
+//				if(actualizar) actualizarPanel(false);
 			}
 			public void windowActivated(WindowEvent e) {}
 		});

@@ -9,35 +9,27 @@ import java.util.ArrayList;
 public class Socket_Cliente {
 	private static Socket cliente;
 
-	//    public Socket_Cliente() {
-	//        try {
-	//            cliente = new Socket("localhost", 4500);
-	//        } catch (Exception e) {
-	//            System.err.println("Client Error: " + e.getMessage());
-	//            System.err.println("Localized: " + e.getLocalizedMessage());
-	//            System.err.println("Stack Trace: " + e.getStackTrace());
-	//        }
-	//    }
-
-	public static boolean realizarPeticion(ArrayList<String> componentes){
+	public static boolean realizarPeticion(Object componentes, int diferenciador){
 
 		startSocket();
 
 		ObjectOutputStream msg;
-		boolean encontrado = false;
+		boolean resultado = true;
 
 		try {
 
 			//Peticion
 			msg = new ObjectOutputStream(cliente.getOutputStream());
-			msg.writeObject(componentes);
+			msg.writeObject(diferenciador);
+			System.out.println("Peticion realizada");
 
 			//Recepcion
 			ObjectInputStream entrada = new ObjectInputStream(cliente.getInputStream());
-			encontrado = (boolean)entrada.readObject();
+			System.out.println("entrando...");
+			int comprobante = (int)entrada.readObject();
 
 			//Fin
-			System.out.println("Recibido por el servidor: >>"+encontrado+"<<");
+			System.out.println("Recibido por el servidor: >>"+resultado+"<<");
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -47,78 +39,110 @@ public class Socket_Cliente {
 			e.printStackTrace();
 		}
 
-		return encontrado;
+		return false;
 
 	}
 
-	public static Object realizarPeticionConRetornoDeObjeto(int key){
-
-		startSocket();
-
-		ObjectOutputStream msg;
-		Object retorno = null;
-
-		try {
-
-			//Peticion
-			msg = new ObjectOutputStream(cliente.getOutputStream());
-			msg.writeObject(key);
-
-
-			//Recepcion
-			ObjectInputStream entrada = new ObjectInputStream(cliente.getInputStream());
-			retorno = entrada.readObject();
-
-			//Fin
-			System.out.println("Recibido por el servidor: >>"+retorno+"<<");
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return retorno;
-
-	}
-
-
-	public static Object realizarPeticionConBusquedaYRetornoDeObjeto(int key, String keyWord){
-		
-		startSocket();
-
-		ObjectOutputStream msg;
-		Object retorno = null;
-		
-		String[] composicion = {Integer.toString(key), keyWord};
-
-		try {
-
-			//Peticion
-			msg = new ObjectOutputStream(cliente.getOutputStream());
-			msg.writeObject(composicion);
-
-
-			//Recepcion
-			ObjectInputStream entrada = new ObjectInputStream(cliente.getInputStream());
-			retorno = entrada.readObject();
-
-			//Fin
-			System.out.println("Recibido por el servidor: >>"+retorno+"<<");
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return retorno;
-
-	}
-	
+//	public static boolean realizarPeticion(ArrayList<String> componentes){
+//
+//		startSocket();
+//
+//		ObjectOutputStream msg;
+//		boolean encontrado = false;
+//
+//		try {
+//
+//			//Peticion
+//			msg = new ObjectOutputStream(cliente.getOutputStream());
+//			msg.writeObject(componentes);
+//
+//			//Recepcion
+//			ObjectInputStream entrada = new ObjectInputStream(cliente.getInputStream());
+//			encontrado = (boolean)entrada.readObject();
+//
+//			//Fin
+//			System.out.println("Recibido por el servidor: >>"+encontrado+"<<");
+//
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		return encontrado;
+//
+//	}
+//
+//	public static Object realizarPeticionConRetornoDeObjeto(int key){
+//
+//		startSocket();
+//
+//		ObjectOutputStream msg;
+//		Object retorno = null;
+//
+//		try {
+//
+//			//Peticion
+//			msg = new ObjectOutputStream(cliente.getOutputStream());
+//			msg.writeObject(key);
+//
+//
+//			//Recepcion
+//			ObjectInputStream entrada = new ObjectInputStream(cliente.getInputStream());
+//			retorno = entrada.readObject();
+//
+//			//Fin
+//			System.out.println("Recibido por el servidor: >>"+retorno+"<<");
+//
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		return retorno;
+//
+//	}
+//
+//
+//	public static Object realizarPeticionConBusquedaYRetornoDeObjeto(int key, String keyWord){
+//		
+//		startSocket();
+//
+//		ObjectOutputStream msg;
+//		Object retorno = null;
+//		
+//		String[] composicion = {Integer.toString(key), keyWord};
+//
+//		try {
+//
+//			//Peticion
+//			msg = new ObjectOutputStream(cliente.getOutputStream());
+//			msg.writeObject(composicion);
+//
+//
+//			//Recepcion
+//			ObjectInputStream entrada = new ObjectInputStream(cliente.getInputStream());
+//			retorno = entrada.readObject();
+//
+//			//Fin
+//			System.out.println("Recibido por el servidor: >>"+retorno+"<<");
+//
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return retorno;
+//
+//	}
+//	
 	
 	private static void startSocket(){
 		try {

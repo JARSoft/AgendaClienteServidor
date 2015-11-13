@@ -13,9 +13,15 @@ public class Gestor_Agenda_cliente {
 	 * @param pass
 	 */
 
-	private final static int STATIC_MOSTRAR_CONTACTOS = 0;
-	private final static int STATIC_BUSCAR_CONTACTOS = 0;
-	private final static int STATIC_ELIMINAR_CONATCTOS = 1;
+	private final static int STATIC_LOGIN = 0;
+	private final static int STATIC_REGISTRAR = 1;
+	private final static int STATIC_MOSTRAR_CONTACTOS = 2;
+	private final static int STATIC_BUSCAR_CONTACTO = 3;
+	private final static int STATIC_MODIFICAR_NOMBRE = 4;
+	private final static int STATIC_MODIFICAR_TELEFONO = 5;
+	private final static int STATIC_MODIFICAR_EMAIL = 6;
+	private final static int STATIC_ELIMINAR_CONTACTO = 7;
+	private final static int STATIC_ANADIR_CONTACTO = 8;
 
 
 	public static boolean login(String user, String pass) {
@@ -24,7 +30,7 @@ public class Gestor_Agenda_cliente {
 
 		ArrayList<String> componentes= new ArrayList<String>();
 		componentes.add(user);componentes.add(pass);
-		boolean exito = Socket_Cliente.realizarPeticion(componentes);
+		boolean exito = (boolean)Socket_Cliente.realizarPeticion(componentes, STATIC_LOGIN);
 
 		return exito;
 	}
@@ -39,9 +45,15 @@ public class Gestor_Agenda_cliente {
 		// TODO - implement Gestor_Agenda_cliente.registrar
 		//		throw new UnsupportedOperationException();
 
+//		ArrayList<String> componentes= new ArrayList<String>();
+//		componentes.add(user);componentes.add(pass); componentes.add(email);
+//		boolean exito = Socket_Cliente.realizarPeticion(componentes);
+		
 		ArrayList<String> componentes= new ArrayList<String>();
 		componentes.add(user);componentes.add(pass); componentes.add(email);
-		boolean exito = Socket_Cliente.realizarPeticion(componentes);
+		
+		boolean exito = Socket_Cliente.realizarPeticion(componentes, STATIC_REGISTRAR);
+		
 
 		return exito;
 	}
@@ -49,9 +61,12 @@ public class Gestor_Agenda_cliente {
 	public static ArrayList<ArrayList<String>> mostrarContactos() {
 		// TODO - implement Gestor_Agenda_cliente.mostrarContactos
 
-		@SuppressWarnings("unchecked")
-		ArrayList<ArrayList<String>> componentes = (ArrayList<ArrayList<String>>) Socket_Cliente.
-				realizarPeticionConRetornoDeObjeto(STATIC_MOSTRAR_CONTACTOS);
+//		@SuppressWarnings("unchecked")
+//		ArrayList<ArrayList<String>> componentes = (ArrayList<ArrayList<String>>) Socket_Cliente.
+//				realizarPeticionConRetornoDeObjeto(STATIC_MOSTRAR_CONTACTOS);
+		
+		ArrayList<ArrayList<String>> componentes= null;
+		boolean exito = Socket_Cliente.realizarPeticion(componentes, STATIC_MOSTRAR_CONTACTOS);
 
 		return componentes;
 
@@ -67,7 +82,8 @@ public class Gestor_Agenda_cliente {
 
 		ArrayList<String> componentes= new ArrayList<String>();
 		componentes.add(nombre);componentes.add(Integer.toString(tlfn)); componentes.add(email);
-		boolean exito = Socket_Cliente.realizarPeticion(componentes);
+		
+		boolean exito = Socket_Cliente.realizarPeticion(componentes, STATIC_ANADIR_CONTACTO);
 
 		return exito;
 	}
@@ -78,9 +94,11 @@ public class Gestor_Agenda_cliente {
 	 */
 	public static ArrayList<ArrayList<String>> buscarContacto(String nombre) {
 		
-		@SuppressWarnings("unchecked")
-		ArrayList<ArrayList<String>> componentes = (ArrayList<ArrayList<String>>) Socket_Cliente.
-				realizarPeticionConBusquedaYRetornoDeObjeto(STATIC_BUSCAR_CONTACTOS, nombre);
+//		@SuppressWarnings("unchecked")
+//		ArrayList<ArrayList<String>> componentes = (ArrayList<ArrayList<String>>) Socket_Cliente.
+//				realizarPeticionConBusquedaYRetornoDeObjeto(STATIC_BUSCAR_CONTACTO, nombre);
+		ArrayList<ArrayList<String>> componentes= null;
+		boolean exito = Socket_Cliente.realizarPeticion(componentes, STATIC_BUSCAR_CONTACTO);
 
 		return componentes;
 	}
@@ -91,7 +109,10 @@ public class Gestor_Agenda_cliente {
 	 */
 	public static ArrayList<String> buscarContacto(int tlfn) {
 		// TODO - implement Gestor_Agenda_cliente.buscarContacto
-		throw new UnsupportedOperationException();
+		ArrayList<String> componentes= null;
+		boolean exito = Socket_Cliente.realizarPeticion(componentes, STATIC_BUSCAR_CONTACTO);
+
+		return componentes;
 	}
 
 	/**
@@ -103,7 +124,7 @@ public class Gestor_Agenda_cliente {
 		// TODO - implement Gestor_Agenda_cliente.modificarNombre
 		ArrayList<String> componentes= new ArrayList<String>();
 		componentes.add(nombre);componentes.add(Integer.toString(telefono));
-		boolean exito = Socket_Cliente.realizarPeticion(componentes);
+		boolean exito = Socket_Cliente.realizarPeticion(componentes, STATIC_MODIFICAR_NOMBRE);
 
 		return exito;
 	}
@@ -118,7 +139,7 @@ public class Gestor_Agenda_cliente {
 		
 		ArrayList<String> componentes= new ArrayList<String>();
 		componentes.add(Integer.toString(tlfn)); componentes.add(Integer.toString(telefono));
-		boolean exito = Socket_Cliente.realizarPeticion(componentes);
+		boolean exito = Socket_Cliente.realizarPeticion(componentes, STATIC_MODIFICAR_TELEFONO);
 
 		return exito;
 	}
@@ -132,7 +153,7 @@ public class Gestor_Agenda_cliente {
 		// TODO - implement Gestor_Agenda_cliente.modificarEmail
 		ArrayList<String> componentes= new ArrayList<String>();
 		componentes.add(email); componentes.add(Integer.toString(telefono));
-		boolean exito = Socket_Cliente.realizarPeticion(componentes);
+		boolean exito = Socket_Cliente.realizarPeticion(componentes, STATIC_MODIFICAR_EMAIL);
 
 		return exito;
 	}
@@ -147,7 +168,7 @@ public class Gestor_Agenda_cliente {
 		// TODO - implement Gestor_Agenda_cliente.eliminarContacto
 		ArrayList<String> componentes= new ArrayList<String>();
 		componentes.add(nombre);componentes.add(Integer.toString(tlfn));componentes.add(email); 
-		boolean exito = Socket_Cliente.realizarPeticion(componentes);
+		boolean exito = Socket_Cliente.realizarPeticion(componentes, STATIC_ELIMINAR_CONTACTO);
 
 		return exito;
 	}

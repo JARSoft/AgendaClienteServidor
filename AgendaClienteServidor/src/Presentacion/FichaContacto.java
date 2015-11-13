@@ -90,6 +90,7 @@ public class FichaContacto extends JFrame {
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Gestor_Agenda_cliente.anadirContacto("a", 0, "a");
 				FichaContacto.this.dispose();
 			}
 		});
